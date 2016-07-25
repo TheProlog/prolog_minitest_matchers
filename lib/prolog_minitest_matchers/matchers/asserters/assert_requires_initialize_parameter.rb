@@ -25,34 +25,44 @@ module MiniTest
         errors[:expected]&.message == message
       end
 
+      def filtered_params
+        full_params.dup.reject { |source_key, _| source_key == param_key }
+      end
+
+      # Running Reek will complain about a :reek:ControlParameter. Protocol is.
       def initial_message_from(message, param_key)
         message || "missing keyword: #{param_key}"
       end
 
       def save_and_try_to_init
         verify_param_in_list
-        saved_item = full_params[param_key]
-        full_params.delete param_key
-        errors = try_to_init
-        full_params[param_key] = saved_item
-        errors
+        save_and_delete_param_before { |params| try_to_init params }
       end
 
-      def try_to_init
+      def save_and_delete_param_before
+        yield filtered_params
+      end
+
+      def try_to_init(params)
         expected_error = nil
         begin
-          _ = klass.new full_params
+          klass.new params
         rescue ArgumentError => error
           expected_error = error
-        rescue StandardError => error
-          ap [:matcher_48, 'Unexpected error', error]
         end
         { expected: expected_error }
       end
 
       def verify_param_in_list
-        no_param_message = "No key :#{param_key} in #{full_params}!"
-        fail KeyError, no_param_message unless full_params.key?(param_key)
+        raise KeyError, no_param_message unless param_in_full_list?
+      end
+
+      def no_param_message
+        "No key :#{param_key} in #{full_params}!"
+      end
+
+      def param_in_full_list?
+        full_params.key? param_key
       end
     end # class MiniTest::Assertions::AssertRequiresInitializeParameter
   end
