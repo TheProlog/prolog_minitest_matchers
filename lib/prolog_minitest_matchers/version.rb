@@ -2,5 +2,5 @@
 
 # Module to satisfy Gem requirements; nothing inside but version-spec constant.
 module PrologMinitestMatchers
-  VERSION = '0.1.0'
+  VERSION = '0.2.0'
 end
