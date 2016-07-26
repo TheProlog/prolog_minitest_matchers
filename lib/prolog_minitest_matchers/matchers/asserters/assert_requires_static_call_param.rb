@@ -3,8 +3,8 @@
 module MiniTest
   # Adding custom assertions to make specs easier to read
   module Assertions
-    # Actual test logic for `#assert_requires_initialize_parameter`.
-    class AssertRequiresInitializeParameter
+    # Actual test logic for `#assert_requires_static_call_paramr`.
+    class AssertRequiresStaticCallParam
       def initialize(klass, full_params, param_key, message)
         @klass = klass
         @full_params = full_params
@@ -14,7 +14,8 @@ module MiniTest
       end
 
       def call(assert)
-        assert.call(errors_as_expected(save_and_try_to_init), message)
+        verify_param_in_list(assert)
+        assert.call(errors_as_expected(save_and_try_to_call), message)
       end
 
       private
@@ -34,36 +35,40 @@ module MiniTest
         message || "missing keyword: #{param_key}"
       end
 
-      def save_and_try_to_init
-        verify_param_in_list
-        save_and_delete_param_before { |params| try_to_init params }
+      def key_not_found_message
+        "Key :#{param_key} not found in #{full_params}!"
       end
 
-      def save_and_delete_param_before
-        yield filtered_params
+      def save_and_try_to_call
+        save_and_delete_param_before { |params| try_to_call params }
+        # saved_item = full_params[param_key]
+        # full_params.delete param_key
+        # errors = try_to_call
+        # full_params[param_key] = saved_item
+        # errors
       end
 
-      def try_to_init(params)
+      def try_to_call(params)
         expected_error = nil
         begin
-          klass.new params
+          klass.call params
         rescue ArgumentError => error
           expected_error = error
         end
         { expected: expected_error }
       end
 
-      def verify_param_in_list
-        raise KeyError, no_param_message unless param_in_full_list?
+      def save_and_delete_param_before
+        yield filtered_params
       end
 
-      def no_param_message
-        "No key :#{param_key} in #{full_params}!"
+      def verify_param_in_list(assert)
+        assert.call(param_in_list?, key_not_found_message)
       end
 
-      def param_in_full_list?
-        full_params.key? param_key
+      def param_in_list?
+        full_params.key?(param_key)
       end
-    end # class MiniTest::Assertions::AssertRequiresInitializeParameter
+    end # class MiniTest::Assertions::AssertRequiresStaticCallParam
   end
 end

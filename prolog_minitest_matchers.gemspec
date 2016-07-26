@@ -30,4 +30,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.12", ">= 1.12.5"
   spec.add_development_dependency "rake", "~> 11.2", ">= 11.2.2"
   spec.add_development_dependency "minitest", "~> 5.9", ">= 5.9.0"
+
+  spec.add_development_dependency "flay", "~> 2.8", ">= 2.8.0"
+  spec.add_development_dependency "flog", "~> 4.4", ">= 4.4.0"
+  spec.add_development_dependency "reek", "~> 4.2", ">= 4.2.1"
+  spec.add_development_dependency "rubocop", "~> 0.42", ">= 0.42.0"
+  spec.add_development_dependency "pry-byebug", "~> 3.4", ">= 3.4.0"
 end
