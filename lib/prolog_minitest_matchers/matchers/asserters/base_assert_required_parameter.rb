@@ -18,15 +18,19 @@ module MiniTest
       end
 
       def call(assert)
-        assert.call(correct_error_message_for?(errors), message)
+        assert.call(correct_error_message?, message)
       end
 
       private
 
       attr_reader :params, :klass, :message, :param_key
 
-      def correct_error_message_for?(errors)
-        errors[:expected]&.message == message
+      def actual_error_message
+        errors[:expected]&.message
+      end
+
+      def correct_error_message?
+        actual_error_message.match message
       end
 
       def errors
