@@ -2,29 +2,32 @@
 
 require 'test_helper'
 
-require 'prolog_minitest_matchers/matchers/requires_static_call_param'
+require 'prolog_minitest_matchers/matchers/requires_dry_struct_attribute'
 
-describe 'must_require_static_call_param' do
+require 'dry-types'
+
+module Types
+  include Dry::Types.module
+end
+
+describe 'must_require_dry_struct_attribute' do
   let(:subject_class) do
-    Class.new do
-      def self.call(foo:, bar:)
-        @foo = foo
-        @bar = bar
-        self
-      end
+    Class.new(Dry::Types::Struct) do
+      attribute :foo, Types::Strict::String
+      attribute :bar, Types::Coercible::Int
     end # Class.new
   end
   let(:actual_error) do
     expect do
-      expect(subject_class).must_require_static_call_param params, bad_key
+      expect(subject_class).must_require_dry_struct_attribute params, bad_key
     end
   end
   let(:bad_key) { :oops }
-  let(:params) { { foo: :foo_param, bar: :bar_param } }
+  let(:params) { { foo: 'Test String', bar: 42 } }
 
   describe 'passes when' do
-    it 'a key in a .call parameter Hash is specified correctly' do
-      expect(subject_class).must_require_static_call_param params, :foo
+    it 'a key in an initialisation hash is specified correctly' do
+      expect(subject_class).must_require_dry_struct_attribute params, :foo
     end
   end # 'passes when'
 
