@@ -9,7 +9,6 @@ module MiniTest
     # Base assertion class to verify error raised when parameter omitted.
     class BaseAssertRequiredParameter
       def initialize(klass, params, param_key, message)
-        VerifyKeyInHash.call params, param_key
         message ||= default_message_for(param_key)
         @params = Internals.hash_without_key(params, param_key)
         @klass = klass
@@ -37,6 +36,7 @@ module MiniTest
       # Methods that neither affect nor are affected by instance state.
       module Internals
         def self.hash_without_key(hash, key)
+          VerifyKeyInHash.call hash, key
           hash.dup.reject { |source_key, _| source_key == key }
         end
       end

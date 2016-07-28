@@ -30,14 +30,14 @@ describe 'must_require_static_call_param' do
 
   describe 'fails when' do
     describe 'an incorrect parameter is specified, and' do
-      let(:subject_error) { actual_error.must_raise Minitest::Assertion }
+      let(:subject_error) { actual_error.must_raise KeyError }
 
-      it 'raises a MiniTest::Assertion' do
-        actual_error.must_raise Minitest::Assertion
+      it 'raises a KeyError' do
+        actual_error.must_raise KeyError
       end
 
       it 'has the correct error message' do
-        expected = "Key :#{bad_key} not found in #{params.inspect}!"
+        expected = "No key :#{bad_key} in #{params.inspect}!"
         expect(subject_error.message).must_equal expected
       end
     end # describe 'an incorrect parameter is specified, and'
