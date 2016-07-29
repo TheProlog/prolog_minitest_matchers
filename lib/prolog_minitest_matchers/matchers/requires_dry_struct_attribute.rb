@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'minitest/spec'
+
 require_relative './asserters/assert_requires_dry_struct_attribute'
 
 module MiniTest
