@@ -35,7 +35,7 @@ Suppose that you have code such as
 
 ```ruby
 # in foo.rb
-class Foo < Dry::Types::Struct
+class Foo < Dry::Struct
   attribute :foo, Types::Strict::String
   attribute :bar, Types::Coercible.Int
   # ...
@@ -256,6 +256,8 @@ Once again, two much more intention-revealing expectations that are counted as o
 ### Notes on Implementation
 
 Attentive readers may note the strong similarity between these three expectations. They would be right; although the use cases differ in important ways, the implementation details that set each apart from the others have been reduced to a minimum, as inspecting the code itself will reveal. See some room for improvement? Great! Open an issue and let's talk about it!
+
+**Important:** This Gem no longer supports versions of the `dry-types` Gem prior to Version 0.8.0, when the `dry-struct` Gem was extracted and published separately. The class names for structs and value objects have changed (from `Dry::Types::Struct` and `Dry::Types::Value` to `Dry::Struct` and `Dry::Struct::Value` respectively), and thus version 0.4.0 of *this* Gem represents a breaking change from what was published before.
 
 
 ## Errata

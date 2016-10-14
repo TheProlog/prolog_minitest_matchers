@@ -25,6 +25,7 @@ module MiniTest
 
       attr_reader :params, :klass, :message, :param_key
 
+      # Recent versions of Reek complain about a :reek:NilCheck. Yup.
       def actual_error_message
         errors[:expected]&.message
       end

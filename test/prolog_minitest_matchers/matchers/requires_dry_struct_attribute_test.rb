@@ -4,7 +4,7 @@ require 'test_helper'
 
 require 'prolog_minitest_matchers/matchers/requires_dry_struct_attribute'
 
-require 'dry-types'
+require 'dry-struct'
 
 module Types
   include Dry::Types.module
@@ -12,7 +12,7 @@ end
 
 describe 'must_require_dry_struct_attribute' do
   let(:subject_class) do
-    Class.new(Dry::Types::Struct) do
+    Class.new(Dry::Struct) do
       attribute :foo, Types::Strict::String
       attribute :bar, Types::Coercible::Int
     end # Class.new

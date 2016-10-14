@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'dry-types'
+require 'dry-struct'
 
 require_relative './base_assert_required_parameter'
 
@@ -16,7 +16,7 @@ module MiniTest
       end
 
       def error_class
-        Dry::Types::StructError
+        Dry::Struct::Error
       end
 
       def error_inducer

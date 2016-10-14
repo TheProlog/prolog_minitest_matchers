@@ -8,8 +8,8 @@ describe 'must_require_initialize_parameter' do
   let(:subject_class) do
     Class.new do
       def initialize(foo:, bar:)
-        @foo = foo
-        @bar = bar
+        # @foo = foo
+        # @bar = bar
       end
     end # Class.new
   end

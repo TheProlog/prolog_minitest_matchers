@@ -28,12 +28,12 @@ RuboCop::RakeTask.new(:rubocop) do |task|
 Reek::Rake::Task.new do |t|
   t.config_file = 'config.reek'
   t.source_files = 'lib/**/*.rb'
-  t.reek_opts = '--sort-by smelliness -s'
+  t.reek_opts = '--sort-by smelliness --no-progress -s'
 end
 
 FlayTask.new do |t|
   t.verbose = true
-  t.dirs = %w(lib)
+  t.dirs = %w(app lib)
 end
 
 FlogTask.new do |t|

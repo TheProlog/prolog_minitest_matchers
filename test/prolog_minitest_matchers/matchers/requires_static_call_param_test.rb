@@ -7,10 +7,10 @@ require 'prolog_minitest_matchers/matchers/requires_static_call_param'
 describe 'must_require_static_call_param' do
   let(:subject_class) do
     Class.new do
-      def self.call(foo:, bar:)
-        @foo = foo
-        @bar = bar
-        self
+      def self.call(foo:, bar:) # rubocop:disable Lint/UnusedMethodArgument
+        # @foo = foo
+        # @bar = bar
+        # self
       end
     end # Class.new
   end
