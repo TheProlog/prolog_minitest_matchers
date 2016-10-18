@@ -42,7 +42,7 @@ module MiniTest
       module Internals
         def self.hash_without_key(hash, key)
           VerifyKeyInHash.call hash, key
-          hash.dup.reject { |source_key, _| source_key == key }
+          hash.reject { |source_key, _| source_key == key }
         end
       end
       private_constant :Internals
