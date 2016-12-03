@@ -17,6 +17,8 @@ if uses_cc
 end
 
 SimpleCov.start do
+  add_filter '/gemset/'
+
   sc_formatters = [
     SimpleCov::Formatter::HTMLFormatter
   ]

@@ -27,19 +27,21 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "dry-struct", "~> 0.1", ">= 0.1.0"
+  spec.add_dependency "dry-struct", "0.1.1"
+  spec.add_dependency "uuid", "2.3.8"
+  spec.add_dependency "minitest-matchers", "1.4.1"
 
-  spec.add_development_dependency "bundler", "~> 1.13", ">= 1.13.4"
-  spec.add_development_dependency "rake", "~> 11.3", ">= 11.3.0"
-  spec.add_development_dependency "minitest", "~> 5.9", ">= 5.9.1"
-  spec.add_development_dependency "minitest-reporters", "~> 1.1", ">= 1.1.11"
+  spec.add_development_dependency "bundler", "1.13.6"
+  spec.add_development_dependency "rake", "11.3.0"
+  spec.add_development_dependency "minitest", "5.10.1"
+  spec.add_development_dependency "minitest-reporters", "1.1.13"
+  spec.add_development_dependency "minitest-tagz", "1.5.2"
 
-  spec.add_development_dependency "flay", "~> 2.8", ">= 2.8.1"
-  spec.add_development_dependency "flog", "~> 4.4", ">= 4.4.0"
-  spec.add_development_dependency "reek", "~> 4.5", ">= 4.5.0"
-  spec.add_development_dependency "rubocop", "~> 0.44", ">= 0.44.1"
-  # spec.add_development_dependency "rubocop", "~> 0.42", ">= 0.42.0" # 0.44.1 as of 20161014
-  spec.add_development_dependency "simplecov", "~> 0.12", ">= 0.12.0"
-  spec.add_development_dependency "pry-byebug", "~> 3.4", ">= 3.4.0"
-  spec.add_development_dependency "pry-doc", "~> 0.9", ">= 0.9.0"
+  spec.add_development_dependency "flay", "2.8.1"
+  spec.add_development_dependency "flog", "4.4.0"
+  spec.add_development_dependency "reek", "4.5.2"
+  spec.add_development_dependency "rubocop", "~> 0.46.0"
+  spec.add_development_dependency "simplecov", "0.12.0"
+  spec.add_development_dependency "pry-byebug", "3.4.1"
+  spec.add_development_dependency "pry-doc", "0.9.0"
 end

@@ -11,3 +11,5 @@
 !/bin/console
 !/bin/setup
 /bin/
+/gemset/
+.rbenv-gemsets
